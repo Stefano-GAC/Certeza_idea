@@ -3,18 +3,24 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
-const HERO_VIDEOS = ['/hero-video.mp4', '/hero-video-2.mp4'];
+const HERO_VIDEOS = [
+  '/1777888677856-05e224b5-a176-4131-b313-6dc168051ac0-1998147_0_ltx23_v__00374-audio.mp4',
+  '/hero-video.mp4',
+  '/hero-video-2.mp4',
+];
 const CROSSFADE_MS = 1200;
 
 export default function Hero() {
   const [isLoaded, setIsLoaded] = useState(false);
   // activeIndex = video actualmente visible (z-index alto)
   const [activeIndex, setActiveIndex] = useState(0);
+  const [incomingIndex, setIncomingIndex] = useState<number | null>(null);
   // isCrossfading = true durante la transición
   const [isCrossfading, setIsCrossfading] = useState(false);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([null, null]);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const crossfadeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const activeIndexRef = useRef(0);
+  const incomingIndexRef = useRef<number | null>(null);
   const isCrossfadingRef = useRef(false);
 
   const startCrossfade = () => {
@@ -23,6 +29,8 @@ export default function Hero() {
     setIsCrossfading(true);
 
     const nextIndex = (activeIndexRef.current + 1) % HERO_VIDEOS.length;
+    incomingIndexRef.current = nextIndex;
+    setIncomingIndex(nextIndex);
     // Arranca el siguiente video desde el principio
     const nextVideo = videoRefs.current[nextIndex];
     if (nextVideo) {
@@ -33,6 +41,8 @@ export default function Hero() {
     crossfadeTimer.current = setTimeout(() => {
       activeIndexRef.current = nextIndex;
       setActiveIndex(nextIndex);
+      incomingIndexRef.current = null;
+      setIncomingIndex(null);
       isCrossfadingRef.current = false;
       setIsCrossfading(false);
     }, CROSSFADE_MS);
@@ -51,7 +61,7 @@ export default function Hero() {
       <div className="absolute inset-0 z-0 h-full w-full overflow-hidden">
         {HERO_VIDEOS.map((src, idx) => {
           const isActive = idx === activeIndex;
-          const isIncoming = isCrossfading && idx !== activeIndex;
+          const isIncoming = isCrossfading && idx === incomingIndex;
           // Opacidad: activo=1, entrante durante transición=1, resto=0
           const opacity = isActive || isIncoming ? 1 : 0;
           // z-index: el entrante va encima durante el crossfade para aparecer
