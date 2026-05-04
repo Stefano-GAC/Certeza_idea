@@ -4,51 +4,66 @@ import { motion } from 'framer-motion';
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-beer-gold/20 py-12 px-4">
-      <div className="max-w-7xl mx-auto">
+    <footer id="contacto" className="border-t border-beer-gold/30 bg-black py-16 px-4 md:px-8">
+      <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left"
+          className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-3"
         >
-          {/* Logo */}
+          {/* Marca */}
           <div>
-            <h3 className="text-2xl font-bold text-beer-gold mb-2">CERTEZA</h3>
-            <p className="text-gray-400">Cervezas artesanales con pasión</p>
+            <h3 className="mb-3 text-3xl font-black tracking-[0.14em] text-beer-gold">CERTEZA</h3>
+            <p className="max-w-sm text-gray-300">
+              Cervecería artesanal dedicada a crear experiencias únicas con ingredientes de primera calidad.
+            </p>
           </div>
 
-          {/* Links */}
+          {/* Enlaces */}
           <div>
-            <h4 className="text-beer-gold font-bold mb-4">Enlaces</h4>
-            <ul className="space-y-2 text-gray-400">
-              <li><a href="#" className="hover:text-beer-gold transition">Inicio</a></li>
-              <li><a href="#" className="hover:text-beer-gold transition">Cervezas</a></li>
-              <li><a href="#" className="hover:text-beer-gold transition">Contacto</a></li>
+            <h4 className="mb-4 text-lg font-bold text-beer-gold">Navegación</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#inicio" className="text-gray-300 transition hover:text-beer-gold">
+                  Inicio
+                </a>
+              </li>
+              <li>
+                <a href="#cervezas" className="text-gray-300 transition hover:text-beer-gold">
+                  Nuestras Cervezas
+                </a>
+              </li>
+              <li>
+                <a href="#contacto" className="text-gray-300 transition hover:text-beer-gold">
+                  Contacto
+                </a>
+              </li>
             </ul>
           </div>
 
-          {/* Redes */}
+          {/* Contacto */}
           <div>
-            <h4 className="text-beer-gold font-bold mb-4">Síguenos</h4>
-            <div className="flex justify-center md:justify-start gap-4 text-gray-400">
-              <a href="#" className="hover:text-beer-gold transition">Facebook</a>
-              <a href="#" className="hover:text-beer-gold transition">Instagram</a>
-              <a href="#" className="hover:text-beer-gold transition">Twitter</a>
+            <h4 className="mb-4 text-lg font-bold text-beer-gold">Contacto</h4>
+            <div className="space-y-2 text-gray-300">
+              <p>info@certeza.com</p>
+              <p>+34 91 234 5678</p>
+              <p>Madrid, Espana</p>
             </div>
           </div>
         </motion.div>
 
-        {/* Copyright */}
+        <div className="mb-6 h-px bg-gradient-to-r from-transparent via-beer-gold/40 to-transparent" />
+
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="mt-8 pt-8 border-t border-beer-gold/10 text-center text-gray-500"
+          className="text-center text-sm text-gray-400"
         >
-          <p>&copy; 2024 Certeza - Cervecería Artesanal. Todos los derechos reservados.</p>
+          <p>&copy; 2026 CERTEZA. Todos los derechos reservados.</p>
         </motion.div>
       </div>
     </footer>

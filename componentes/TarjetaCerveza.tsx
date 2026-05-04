@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import Image from 'next/image';
 
 interface Cerveza {
   id: number;
@@ -17,60 +16,53 @@ export default function TarjetaCerveza({ beer }: { beer: Cerveza }) {
 
   return (
     <motion.div
-      className="relative h-96 rounded-lg overflow-hidden cursor-pointer group"
+      className="relative w-full aspect-square rounded-xl overflow-hidden cursor-pointer group shadow-xl hover:shadow-2xl transition-shadow"
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 1.08 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
     >
-      {/* Fondo con color */}
+      {/* Imagen full-bleed */}
+      <motion.div
+        className="relative h-full w-full overflow-hidden"
+        animate={{ scale: isHovered ? 1.15 : 1 }}
+        transition={{ duration: 0.4 }}
+      >
+        <img
+          src={beer.image}
+          alt={beer.name}
+          className="h-full w-full object-cover"
+          onError={(e) => {
+            (e.target as HTMLImageElement).src = '/beer-placeholder.svg';
+          }}
+        />
+      </motion.div>
+
       <div
         className="absolute inset-0 transition-all duration-500"
         style={{
-          backgroundColor: isHovered ? beer.color : '#1a1a1a',
+          background: isHovered
+            ? `linear-gradient(to top, ${beer.color}B3, rgba(0,0,0,0.2))`
+            : 'linear-gradient(to top, rgba(0,0,0,0.78), rgba(0,0,0,0.15))',
         }}
       />
 
-      {/* Contenedor de imagen */}
+      {/* Información - Mejorada */}
       <motion.div
-        className="relative w-full h-80 flex items-center justify-center overflow-hidden"
-        animate={{ scale: isHovered ? 1.1 : 1, rotate: isHovered ? 5 : 0 }}
+        className="absolute bottom-0 left-0 right-0 p-5"
+        animate={{ translateY: isHovered ? 0 : 24, opacity: isHovered ? 1 : 0.7 }}
         transition={{ duration: 0.3 }}
       >
-        <div className="relative w-32 h-48 sm:w-40 sm:h-56">
-          <motion.div
-            className="relative w-full h-full"
-            animate={{ rotateY: isHovered ? 180 : 0, rotateX: isHovered ? 10 : 0 }}
-            transition={{ duration: 0.6 }}
-            style={{ perspective: '1000px' }}
-          >
-            <img
-              src={beer.image}
-              alt={beer.name}
-              className="w-full h-full object-contain filter drop-shadow-2xl"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = '/beer-placeholder.svg';
-              }}
-            />
-          </motion.div>
-        </div>
+        <h3 className="text-lg font-bold text-beer-gold mb-1">{beer.name}</h3>
+        <p className="text-sm text-gray-200 line-clamp-2">{beer.description}</p>
       </motion.div>
 
-      {/* Información */}
+      {/* Brillo y efecto al hover */}
       <motion.div
-        className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent"
-        animate={{ translateY: isHovered ? 0 : 20, opacity: isHovered ? 1 : 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <h3 className="text-lg font-bold text-beer-gold mb-2">{beer.name}</h3>
-        <p className="text-sm text-gray-300">{beer.description}</p>
-      </motion.div>
-
-      {/* Brillo al hover */}
-      <motion.div
-        className="absolute inset-0 bg-white/0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none rounded-xl"
         animate={{
-          background: isHovered ? 'radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)' : 'radial-gradient(circle at center, rgba(255,255,255,0) 0%, transparent 70%)',
+          background: isHovered ? 'radial-gradient(circle at center, rgba(212, 175, 55, 0.1) 0%, transparent 70%)' : 'radial-gradient(circle at center, rgba(212, 175, 55, 0) 0%, transparent 70%)',
+          border: isHovered ? '2px solid rgba(212, 175, 55, 0.3)' : '1px solid rgba(212, 175, 55, 0)',
         }}
         transition={{ duration: 0.3 }}
       />
