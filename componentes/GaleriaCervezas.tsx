@@ -1,79 +1,60 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import TarjetaCerveza from './TarjetaCerveza';
+import type { CSSProperties } from 'react';
 
 const BEERS = [
   {
     id: 1,
-    name: 'IPA Dorada',
-    description: 'Cerveza artesanal con aromas cítricos',
-    image: '/beer1.jpg',
-    color: '#cc5500',
+    nombre: 'Le Dernier des Mojitos',
+    imagen: 'https://www.alafut.qc.ca/app/uploads/2024/03/ALAFUT_DernierMojitos_3D.png',
   },
   {
     id: 2,
-    name: 'Stout Oscura',
-    description: 'Robusta con notas de chocolate y café',
-    image: '/beer2.jpg',
-    color: '#1a1a1a',
+    nombre: 'Coyloup',
+    imagen: 'https://www.alafut.qc.ca/app/uploads/2021/09/ALAFUT_Coyloup_3D-3.png',
   },
   {
     id: 3,
-    name: 'Lager Crisp',
-    description: 'Refrescante y ligera para cualquier ocasión',
-    image: '/beer3.jpg',
-    color: '#f4d03f',
+    nombre: 'British a l erable',
+    imagen: 'https://www.alafut.qc.ca/app/uploads/2018/08/ALAFUT_British-Erable_3D.png',
   },
   {
     id: 4,
-    name: 'Porter Premium',
-    description: 'Compleja con toques de malta tostada',
-    image: '/beer4.jpg',
-    color: '#2c2c2c',
+    nombre: 'Mimosa Desperado',
+    imagen: 'https://www.alafut.qc.ca/app/uploads/2026/03/ALAFUT_MimosaDesperado_3D.png',
+  },
+  {
+    id: 5,
+    nombre: 'QV18',
+    imagen: 'https://www.alafut.qc.ca/app/uploads/2026/04/ALAFUT_QV18_3D.png',
+  },
+  {
+    id: 6,
+    nombre: 'Gloria',
+    imagen: 'https://www.alafut.qc.ca/app/uploads/2023/07/ALAFU_Gloria_3D-1.png',
   },
 ];
 
 export default function BeerGallery() {
-  return (
-    <section id="cervezas" className="py-28 px-4 md:px-8 bg-beer-dark">
-      <div className="max-w-7xl mx-auto">
-        {/* Título con animación */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-24"
-        >
-          <h2 className="text-5xl md:text-6xl font-bold text-beer-gold mb-4">
-            Nuestras Cervezas
-          </h2>
-          <p className="text-lg md:text-xl text-gray-400 mb-6">
-            Seleccion premium de cerveza artesanal
-          </p>
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.6 }}
-            className="h-1 w-32 bg-gradient-to-r from-beer-gold to-beer-amber mx-auto origin-center"
-          ></motion.div>
-        </motion.div>
+  const LOOP_BEERS = [...BEERS, ...BEERS];
 
-        {/* Grid de cervezas - 2 columnas en mobile, 4 en desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-8 md:gap-10">
-          {BEERS.map((beer, index) => (
-            <motion.div
-              key={beer.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              viewport={{ once: true }}
-              className="w-full"
-            >
-              <TarjetaCerveza beer={beer} />
-            </motion.div>
-          ))}
+  return (
+    <section id="cervezas" className="alafut-beers-section">
+      <div className="alafut-beers-shell">
+        <div className="alafut-beers-window">
+          <div
+            className="alafut-beers-track alafut-beers-track--loop"
+            style={{ '--beers-count': BEERS.length } as CSSProperties}
+            role="list"
+            aria-label="Carrusel de cervezas estilo Alafut"
+          >
+            {LOOP_BEERS.map((beer, idx) => (
+              <article key={`${beer.id}-${idx}`} className="alafut-beers-slide" role="listitem" aria-label={beer.nombre}>
+                <div className="alafut-beers-card">
+                  <img className="alafut-beers-card-can" src={beer.imagen} alt={beer.nombre} loading="lazy" />
+                  <div className="alafut-beers-card-shadow" aria-hidden="true" />
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -99,3 +99,138 @@ h4 {
 .loader-dot-delay-2 {
   animation-delay: 0.32s;
 }
+
+/* Alafut-style beer slider */
+.alafut-beers-section {
+  background: linear-gradient(180deg, #f7f4ef 0%, #ffffff 60%, #f5f1ea 100%);
+  overflow: hidden;
+  padding: clamp(1.75rem, 4vw, 3rem) 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.alafut-beers-shell {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 clamp(1rem, 3vw, 2rem);
+  position: relative;
+}
+
+.alafut-beers-window {
+  overflow: hidden;
+}
+
+.alafut-beers-track {
+  --slider-gap: clamp(0.9rem, 2.2vw, 1.6rem);
+  --slide-width: clamp(150px, 17vw, 220px);
+  align-items: stretch;
+  display: flex;
+  gap: var(--slider-gap);
+  margin: 0;
+  overflow: visible;
+  padding: 0 0 1rem;
+}
+
+.alafut-beers-track--loop {
+  animation: alafut-loop 24s linear infinite;
+  width: max-content;
+}
+
+.alafut-beers-slide {
+  flex: 0 0 var(--slide-width);
+  list-style: none;
+  min-width: 0;
+}
+
+.alafut-beers-card {
+  align-items: flex-end;
+  display: flex;
+  height: clamp(360px, 42vw, 520px);
+  justify-content: center;
+  position: relative;
+  transition: transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.alafut-beers-card-bg {
+  clip-path: inset(0 45% 0 45%);
+  bottom: 0;
+  left: 50%;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%) scaleX(0.15);
+  transform-origin: center;
+  transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 280ms ease, clip-path 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  width: min(72%, 260px);
+}
+
+.alafut-beers-card-bg img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+.alafut-beers-card-can {
+  display: block;
+  filter: drop-shadow(0 28px 26px rgba(0, 0, 0, 0.2));
+  height: auto;
+  margin-top: auto;
+  position: relative;
+  transition: transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 300ms ease;
+  width: min(100%, 220px);
+  z-index: 2;
+}
+
+.alafut-beers-card-shadow {
+  background: radial-gradient(circle, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 72%);
+  bottom: 0.5rem;
+  height: 2.5rem;
+  left: 50%;
+  opacity: 0.56;
+  position: absolute;
+  transform: translateX(-50%);
+  transition: width 320ms ease, opacity 320ms ease;
+  width: 58%;
+  z-index: 1;
+}
+
+.alafut-beers-slide:hover .alafut-beers-card {
+  transform: translateY(-10px);
+}
+
+.alafut-beers-slide:hover .alafut-beers-card-bg {
+  clip-path: inset(0 0 0 0);
+  opacity: 0.98;
+  transform: translateX(-50%) scaleX(1);
+}
+
+.alafut-beers-slide:hover .alafut-beers-card-can {
+  filter: drop-shadow(0 32px 30px rgba(0, 0, 0, 0.3));
+  transform: translateY(-8px) scale(1.035);
+}
+
+.alafut-beers-slide:hover .alafut-beers-card-shadow {
+  opacity: 0.82;
+  width: 68%;
+}
+
+@keyframes alafut-loop {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(calc((-1 * (var(--slide-width) + var(--slider-gap))) * var(--beers-count)));
+  }
+}
+
+@media (max-width: 639px) {
+  .alafut-beers-shell {
+    padding: 0 0.75rem;
+  }
+
+  .alafut-beers-track {
+    --slide-width: clamp(140px, 46vw, 180px);
+  }
+}
