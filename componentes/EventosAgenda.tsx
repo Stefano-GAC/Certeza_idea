@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { assetPath } from './assetPath';
 
 const EVENTOS = [
   {
@@ -11,7 +12,7 @@ const EVENTOS = [
     desc: 'Sesiones en vivo con cerveza fria, luces bajas y una mesa lista para quedarse toda la noche.',
     lugar: 'Bogotá',
     hora: 'Desde las 7:00 PM',
-    imagen: '/CERTEZA Night _ Live Music.png',
+    imagen: assetPath('/CERTEZA Night _ Live Music.png'),
   },
   {
     id: 2,
@@ -20,7 +21,7 @@ const EVENTOS = [
     desc: 'El plan grande de la casa: barra encendida, mesas llenas y energia de rooftop para cerrar la semana.',
     lugar: 'Envigado',
     hora: 'Viernes y sábados, 8:00 PM',
-    imagen: '/CERTEZA Night _ Crowd Wide Shot.png',
+    imagen: assetPath('/CERTEZA Night _ Crowd Wide Shot.png'),
   },
   {
     id: 3,
@@ -29,7 +30,7 @@ const EVENTOS = [
     desc: 'Una noche pensada para brindar: rondas compartidas, maridaje rapido y ambiente de celebración.',
     lugar: 'Medellín',
     hora: '8:30 PM',
-    imagen: '/CERTEZA Night _ Cheers Moment.png',
+    imagen: assetPath('/CERTEZA Night _ Cheers Moment.png'),
   },
   {
     id: 4,
@@ -38,7 +39,7 @@ const EVENTOS = [
     desc: 'Cata guiada frente a barra con servicio especial, pours perfectos y foco total en la experiencia.',
     lugar: 'Cali',
     hora: '9:00 PM',
-    imagen: '/CERTEZA Night _ Bartender Pour.png',
+    imagen: assetPath('/CERTEZA Night _ Bartender Pour.png'),
   },
 ];
 

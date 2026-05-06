@@ -1,19 +1,30 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { assetPath } from './assetPath';
 
 export default function PantallaCarga() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     const minDuration = 2200;
+    const maxDuration = 6500;
     const start = Date.now();
+    let hidden = false;
+
+    const hide = (delay = 0) => {
+      if (hidden) return;
+      hidden = true;
+      window.setTimeout(() => setVisible(false), delay);
+    };
 
     const hideLoader = () => {
       const elapsed = Date.now() - start;
       const remaining = Math.max(0, minDuration - elapsed);
-      window.setTimeout(() => setVisible(false), remaining);
+      hide(remaining);
     };
+
+    const hardTimeout = window.setTimeout(() => hide(), maxDuration);
 
     if (document.readyState === 'complete') {
       hideLoader();
@@ -21,7 +32,10 @@ export default function PantallaCarga() {
       window.addEventListener('load', hideLoader, { once: true });
     }
 
-    return () => window.removeEventListener('load', hideLoader);
+    return () => {
+      window.removeEventListener('load', hideLoader);
+      window.clearTimeout(hardTimeout);
+    };
   }, []);
 
   if (!visible) {
@@ -31,7 +45,7 @@ export default function PantallaCarga() {
   return (
     <div className="fixed inset-0 z-[120] flex flex-col items-center justify-center bg-[#e6d157]">
       <img
-        src="/CERTEZA%20Badge%20Logo%20_%20Transparent.png"
+        src={assetPath('/CERTEZA Badge Logo _ Transparent.png')}
         alt="Certeza cargando"
         className="loader-logo-bounce h-56 w-56 object-contain md:h-72 md:w-72"
       />

@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { assetPath } from './assetPath';
 
 export default function SeccionImpactoVideo() {
   return (
@@ -53,7 +54,7 @@ export default function SeccionImpactoVideo() {
               playsInline
               preload="auto"
             >
-              <source src="/1777889988869-bebe544a-47cc-458d-b1eb-6af7b9a5e332-1998211_0_ltx23_v__00393-audio.mp4" type="video/mp4" />
+              <source src={assetPath('/1777889988869-bebe544a-47cc-458d-b1eb-6af7b9a5e332-1998211_0_ltx23_v__00393-audio.mp4')} type="video/mp4" />
             </video>
             <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-black/80 to-transparent" />
             <span className="absolute bottom-5 left-6 z-30 rounded-full bg-black/55 px-3 py-1 text-[10px] tracking-[0.18em] text-white backdrop-blur">

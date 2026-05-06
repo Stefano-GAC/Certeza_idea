@@ -102,9 +102,13 @@ h4 {
 
 /* Alafut-style beer slider */
 .alafut-beers-section {
-  background: linear-gradient(180deg, #f7f4ef 0%, #ffffff 60%, #f5f1ea 100%);
+  background: #b9b9b9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - 56px);
   overflow: hidden;
-  padding: clamp(1.75rem, 4vw, 3rem) 0 clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(0.4rem, 1vw, 0.9rem) 0 clamp(1rem, 2vw, 1.6rem);
 }
 
 .alafut-beers-shell {
@@ -114,13 +118,33 @@ h4 {
   position: relative;
 }
 
+.alafut-beers-heading-wrap {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto clamp(0.5rem, 1.2vw, 0.85rem);
+  max-width: 1400px;
+  min-height: clamp(48px, 7vw, 84px);
+  padding: 0 clamp(1rem, 3vw, 2rem);
+  text-align: center;
+}
+
+.alafut-beers-heading {
+  color: #ffffff;
+  font-size: clamp(2.15rem, 5vw, 4.1rem);
+  letter-spacing: 0.03em;
+  line-height: 0.95;
+  margin: 0;
+  text-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
 .alafut-beers-window {
   overflow: hidden;
 }
 
 .alafut-beers-track {
   --slider-gap: clamp(0.9rem, 2.2vw, 1.6rem);
-  --slide-width: clamp(150px, 17vw, 220px);
+  --slide-width: clamp(270px, 32vw, 420px);
   align-items: stretch;
   display: flex;
   gap: var(--slider-gap);
@@ -143,31 +167,32 @@ h4 {
 .alafut-beers-card {
   align-items: flex-end;
   display: flex;
-  height: clamp(360px, 42vw, 520px);
+  height: clamp(500px, 72vh, 920px);
   justify-content: center;
+  overflow: visible;
   position: relative;
   transition: transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .alafut-beers-card-bg {
-  clip-path: inset(0 45% 0 45%);
-  bottom: 0;
+  bottom: 0.75rem;
   left: 50%;
   opacity: 0;
   overflow: hidden;
   position: absolute;
-  top: 0;
-  transform: translateX(-50%) scaleX(0.15);
+  height: calc(var(--beer-can-width, 220px) * 1.334);
+  transform: translateX(-50%) scaleX(0.3);
   transform-origin: center;
-  transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 280ms ease, clip-path 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
-  width: min(72%, 260px);
+  transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1), opacity 240ms ease;
+  width: min(100%, calc(var(--beer-can-width, 220px) + 18px));
+  z-index: 1;
 }
 
 .alafut-beers-card-bg img {
   display: block;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
+  object-position: center bottom;
   width: 100%;
 }
 
@@ -177,8 +202,9 @@ h4 {
   height: auto;
   margin-top: auto;
   position: relative;
+  transform: scale(var(--beer-can-scale, 1));
   transition: transform 360ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 300ms ease;
-  width: min(100%, 220px);
+  width: min(100%, var(--beer-can-width, 220px));
   z-index: 2;
 }
 
@@ -200,14 +226,13 @@ h4 {
 }
 
 .alafut-beers-slide:hover .alafut-beers-card-bg {
-  clip-path: inset(0 0 0 0);
-  opacity: 0.98;
-  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+  transform: translateX(-50%) scaleX(var(--beer-art-scale, 1.18));
 }
 
 .alafut-beers-slide:hover .alafut-beers-card-can {
   filter: drop-shadow(0 32px 30px rgba(0, 0, 0, 0.3));
-  transform: translateY(-8px) scale(1.035);
+  transform: translateY(-8px) scale(var(--beer-can-hover-scale, 1.035));
 }
 
 .alafut-beers-slide:hover .alafut-beers-card-shadow {
@@ -226,11 +251,23 @@ h4 {
 }
 
 @media (max-width: 639px) {
+  .alafut-beers-section {
+    min-height: calc(100vh - 52px);
+  }
+
+  .alafut-beers-heading-wrap {
+    min-height: clamp(44px, 11vw, 72px);
+  }
+
+  .alafut-beers-heading {
+    letter-spacing: 0.02em;
+  }
+
   .alafut-beers-shell {
     padding: 0 0.75rem;
   }
 
   .alafut-beers-track {
-    --slide-width: clamp(140px, 46vw, 180px);
+    --slide-width: clamp(235px, 78vw, 340px);
   }
 }

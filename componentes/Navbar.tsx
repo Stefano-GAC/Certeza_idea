@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { assetPath } from './assetPath';
 
 function IconPhone() {
   return (
@@ -72,7 +73,7 @@ function LargeLogo({ scrolled }: { scrolled: boolean }) {
       }`}
     >
       <img
-        src="/CERTEZA Badge Logo _ Transparent.png"
+        src={assetPath('/CERTEZA Badge Logo _ Transparent.png')}
         alt="Certeza logo"
         className="h-full w-full object-contain drop-shadow-[0_5px_16px_rgba(0,0,0,0.42)]"
       />

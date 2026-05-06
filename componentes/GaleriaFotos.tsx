@@ -2,16 +2,17 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { assetPath } from './assetPath';
 
 const FOTOS = [
-  { area: 'main', src: '/CERTEZA Trio _ Hero Poster.png',         titulo: 'Tres razones para brindar', texto: 'Cada botella es una historia. Elige la tuya.' },
-  { area: 's1',   src: '/CERTEZA IPA _ Neon City.png',             titulo: 'IPA Neon City',             texto: 'Intensidad que enciende la noche.' },
-  { area: 's2',   src: '/CERTEZA Lager _ Golden Splash.png',       titulo: 'Lager Golden Splash',       texto: 'Frescura que no se negocia.' },
-  { area: 'wide', src: '/CERTEZA Trio _ Rooftop Lifestyle.png',    titulo: 'La cerveza del momento',    texto: 'Los mejores planes merecen la mejor cerveza.' },
-  { area: 's3',   src: '/CERTEZA Stout _ Smoky Bar.png',           titulo: 'Stout Smoky Bar',           texto: 'Chocolate, humo y caracter en cada sorbo.' },
-  { area: 's4',   src: '/Cinematic Craft Beer 3.png',              titulo: 'Artesanal de verdad',       texto: 'Elaborada con obsesion, servida con orgullo.' },
-  { area: 's5',   src: '/Cinematic Craft Beer 4.png',              titulo: 'Mas que una cerveza',       texto: 'Es la excusa perfecta para reunirse.' },
-  { area: 's6',   src: '/CERTEZA Bottle _ Glass _ Luxury Bar.png', titulo: 'Lujo en cada copa',         texto: 'Porque los detalles marcan la diferencia.' },
+  { area: 'main', src: assetPath('/CERTEZA Trio _ Hero Poster.png'),         titulo: 'Tres razones para brindar', texto: 'Cada botella es una historia. Elige la tuya.' },
+  { area: 's1',   src: assetPath('/CERTEZA IPA _ Neon City.png'),             titulo: 'IPA Neon City',             texto: 'Intensidad que enciende la noche.' },
+  { area: 's2',   src: assetPath('/CERTEZA Lager _ Golden Splash.png'),       titulo: 'Lager Golden Splash',       texto: 'Frescura que no se negocia.' },
+  { area: 'wide', src: assetPath('/CERTEZA Trio _ Rooftop Lifestyle.png'),    titulo: 'La cerveza del momento',    texto: 'Los mejores planes merecen la mejor cerveza.' },
+  { area: 's3',   src: assetPath('/CERTEZA Stout _ Smoky Bar.png'),           titulo: 'Stout Smoky Bar',           texto: 'Chocolate, humo y caracter en cada sorbo.' },
+  { area: 's4',   src: assetPath('/Cinematic Craft Beer 3.png'),              titulo: 'Artesanal de verdad',       texto: 'Elaborada con obsesion, servida con orgullo.' },
+  { area: 's5',   src: assetPath('/Cinematic Craft Beer 4.png'),              titulo: 'Mas que una cerveza',       texto: 'Es la excusa perfecta para reunirse.' },
+  { area: 's6',   src: assetPath('/CERTEZA Bottle _ Glass _ Luxury Bar.png'), titulo: 'Lujo en cada copa',         texto: 'Porque los detalles marcan la diferencia.' },
 ];
 
 function FotoCell({ foto, index }: { foto: typeof FOTOS[number]; index: number }) {

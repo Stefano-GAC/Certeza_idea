@@ -2,11 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import { assetPath } from './assetPath';
 
 const HERO_VIDEOS = [
-  '/1777888677856-05e224b5-a176-4131-b313-6dc168051ac0-1998147_0_ltx23_v__00374-audio.mp4',
-  '/hero-video.mp4',
-  '/hero-video-2.mp4',
+  assetPath('/1777888677856-05e224b5-a176-4131-b313-6dc168051ac0-1998147_0_ltx23_v__00374-audio.mp4'),
+  assetPath('/hero-video.mp4'),
+  assetPath('/hero-video-2.mp4'),
 ];
 const CROSSFADE_MS = 1200;
 

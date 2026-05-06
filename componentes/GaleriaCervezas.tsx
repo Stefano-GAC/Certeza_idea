@@ -1,35 +1,67 @@
 import type { CSSProperties } from 'react';
+import { assetPath } from './assetPath';
 
-const BEERS = [
+interface Cerveza {
+  id: number;
+  nombre: string;
+  imagen: string;
+  fondo: string;
+  ancho?: number;
+  escalaFondo?: number;
+  escalaLata?: number;
+  escalaLataHover?: number;
+}
+
+const BEERS: Cerveza[] = [
   {
     id: 1,
-    nombre: 'Le Dernier des Mojitos',
-    imagen: 'https://www.alafut.qc.ca/app/uploads/2024/03/ALAFUT_DernierMojitos_3D.png',
+    nombre: 'Mojito',
+    imagen: assetPath('/latas/mojito.png'),
+    fondo: assetPath('/latas/mojito2.png'),
+    ancho: 278,
+    escalaFondo: 1.44,
+    escalaLata: 1.34,
+    escalaLataHover: 1.4,
   },
   {
     id: 2,
-    nombre: 'Coyloup',
-    imagen: 'https://www.alafut.qc.ca/app/uploads/2021/09/ALAFUT_Coyloup_3D-3.png',
+    nombre: 'Lobos',
+    imagen: assetPath('/latas/lobos.png'),
+    fondo: assetPath('/latas/lobos2.png'),
+    ancho: 278,
+    escalaFondo: 1.44,
+    escalaLata: 1.34,
+    escalaLataHover: 1.4,
   },
   {
     id: 3,
-    nombre: 'British a l erable',
-    imagen: 'https://www.alafut.qc.ca/app/uploads/2018/08/ALAFUT_British-Erable_3D.png',
+    nombre: 'Perro Vaquero',
+    imagen: assetPath('/latas/perrovaquero.png'),
+    fondo: assetPath('/latas/perrovaquero2.png'),
+    ancho: 278,
+    escalaFondo: 1.44,
+    escalaLata: 1.34,
+    escalaLataHover: 1.4,
   },
   {
     id: 4,
-    nombre: 'Mimosa Desperado',
-    imagen: 'https://www.alafut.qc.ca/app/uploads/2026/03/ALAFUT_MimosaDesperado_3D.png',
+    nombre: 'Limonada',
+    imagen: assetPath('/latas/limonada.png'),
+    fondo: assetPath('/latas/limonada2.png'),
+    ancho: 278,
+    escalaFondo: 1.44,
+    escalaLata: 1.34,
+    escalaLataHover: 1.4,
   },
   {
     id: 5,
-    nombre: 'QV18',
-    imagen: 'https://www.alafut.qc.ca/app/uploads/2026/04/ALAFUT_QV18_3D.png',
-  },
-  {
-    id: 6,
-    nombre: 'Gloria',
-    imagen: 'https://www.alafut.qc.ca/app/uploads/2023/07/ALAFU_Gloria_3D-1.png',
+    nombre: 'Danza',
+    imagen: assetPath('/latas/danza.png'),
+    fondo: assetPath('/latas/danza2.png'),
+    ancho: 278,
+    escalaFondo: 1.44,
+    escalaLata: 1.34,
+    escalaLataHover: 1.4,
   },
 ];
 
@@ -38,6 +70,11 @@ export default function BeerGallery() {
 
   return (
     <section id="cervezas" className="alafut-beers-section">
+      <div className="alafut-beers-heading-wrap">
+        <h2 className="alafut-beers-heading" style={{ fontFamily: 'var(--font-heading)' }}>
+          Ilustradas para mirar, creadas para brindar.
+        </h2>
+      </div>
       <div className="alafut-beers-shell">
         <div className="alafut-beers-window">
           <div
@@ -48,7 +85,18 @@ export default function BeerGallery() {
           >
             {LOOP_BEERS.map((beer, idx) => (
               <article key={`${beer.id}-${idx}`} className="alafut-beers-slide" role="listitem" aria-label={beer.nombre}>
-                <div className="alafut-beers-card">
+                <div
+                  className="alafut-beers-card"
+                  style={{
+                    '--beer-can-width': `${beer.ancho ?? 220}px`,
+                    '--beer-art-scale': beer.escalaFondo ?? 1.18,
+                    '--beer-can-scale': beer.escalaLata ?? 1,
+                    '--beer-can-hover-scale': beer.escalaLataHover ?? 1.035,
+                  } as CSSProperties}
+                >
+                  <div className="alafut-beers-card-bg" aria-hidden="true">
+                    <img src={beer.fondo} alt="" loading="lazy" />
+                  </div>
                   <img className="alafut-beers-card-can" src={beer.imagen} alt={beer.nombre} loading="lazy" />
                   <div className="alafut-beers-card-shadow" aria-hidden="true" />
                 </div>

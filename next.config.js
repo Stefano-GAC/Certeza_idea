@@ -1,8 +1,14 @@
 /** @type {import('next').NextConfig} */
+const isGithubDeploy = process.env.DEPLOY === 'github';
+const basePath = isGithubDeploy ? '/Certeza_idea' : '';
+
 const nextConfig = {
-  output: process.env.DEPLOY === 'github' ? 'export' : undefined,
-  basePath: process.env.DEPLOY === 'github' ? '/Certeza_idea' : '',
-  assetPrefix: process.env.DEPLOY === 'github' ? '/Certeza_idea/' : '',
+  output: isGithubDeploy ? 'export' : undefined,
+  basePath,
+  assetPrefix: isGithubDeploy ? `${basePath}/` : '',
+  env: {
+    NEXT_PUBLIC_BASE_PATH: basePath,
+  },
   images: {
     unoptimized: true,
   },
